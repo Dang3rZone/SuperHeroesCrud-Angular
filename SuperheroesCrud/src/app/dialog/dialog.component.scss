@@ -16,3 +16,8 @@ mat-label {
 .example-radio-button {
   margin: 5px;
 }
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
