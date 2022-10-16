@@ -34,9 +34,16 @@ export class AppComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(DialogComponent, {
-      width: '30%',
-    });
+    this.dialog
+      .open(DialogComponent, {
+        width: '30%',
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        if (data === 'save') {
+          this.getAllSupes();
+        }
+      });
   }
 
   getAllSupes() {
@@ -53,9 +60,28 @@ export class AppComponent implements OnInit {
   }
 
   editSupe(row: any) {
-    this.dialog.open(DialogComponent, {
-      width: '30%',
-      data: row,
+    this.dialog
+      .open(DialogComponent, {
+        width: '30%',
+        data: row,
+      })
+      .afterClosed()
+      .subscribe((data) => {
+        if (data === 'update') {
+          this.getAllSupes();
+        }
+      });
+  }
+
+  deleteSupe(id: number) {
+    this.api.deleteSupe(id).subscribe({
+      next: (res) => {
+        alert('successfully deleted supe');
+        this.getAllSupes();
+      },
+      error: (res) => {
+        alert('error while deleting supe');
+      },
     });
   }
 

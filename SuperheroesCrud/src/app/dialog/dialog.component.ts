@@ -14,6 +14,7 @@ export interface DialogData {
 })
 export class DialogComponent implements OnInit {
   powersList = ['Creation', 'Manipulations', ' Destruction'];
+  actionBtn: string = 'Save';
   supeForm!: FormGroup;
 
   constructor(
@@ -34,9 +35,10 @@ export class DialogComponent implements OnInit {
     });
 
     if (this.editData) {
+      this.actionBtn = 'Update';
       this.supeForm.controls['name'].setValue(this.editData.name);
       this.supeForm.controls['category'].setValue(this.editData.category);
-      this.supeForm.controls['dateBirth'].setValue(this.editData.name);
+      this.supeForm.controls['dateBirth'].setValue(this.editData.dateBirth);
       this.supeForm.controls['power'].setValue(this.editData.power);
       this.supeForm.controls['id'].setValue(this.editData.id);
       this.supeForm.controls['about'].setValue(this.editData.about);
@@ -44,17 +46,34 @@ export class DialogComponent implements OnInit {
   }
 
   addSupe() {
-    if (this.supeForm.valid) {
-      this.api.postSupe(this.supeForm.value).subscribe({
-        next: (res) => {
-          alert('supe added successfully');
-          this.supeForm.reset();
-          this.dialogRef.close('save');
-        },
-        error: () => {
-          alert('supe added failed');
-        },
-      });
+    if (!this.editData) {
+      if (this.supeForm.valid) {
+        this.api.postSupe(this.supeForm.value).subscribe({
+          next: (res) => {
+            alert('supe added successfully');
+            this.supeForm.reset();
+            this.dialogRef.close('save');
+          },
+          error: () => {
+            alert('supe added failed');
+          },
+        });
+      }
+    } else {
+      this.updateSupe();
     }
+  }
+
+  updateSupe() {
+    this.api.putSupe(this.supeForm.value, this.editData.id).subscribe({
+      next: (res) => {
+        alert('supe updated successfully');
+        this.supeForm.reset();
+        this.dialogRef.close('update');
+      },
+      error: () => {
+        alert('supe not updated');
+      },
+    });
   }
 }
