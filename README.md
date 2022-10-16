@@ -4,8 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development Back-server
 
-Install json-server: `npm install -g json-server`
-Run json-server: `json-server --watch db.json`
+Install json-server: `npm install -g json-server`.
+Run json-server: `json-server --watch db.json`.
 
 ## Development server
 
