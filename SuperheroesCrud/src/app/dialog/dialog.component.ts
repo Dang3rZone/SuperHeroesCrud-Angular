@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 export interface DialogData {
   animal: 'panda' | 'unicorn' | 'lion';
@@ -19,7 +19,8 @@ export class DialogComponent implements OnInit {
   constructor(
     private FormBuilder: FormBuilder,
     private api: ApiService,
-    private dialogRef: MatDialogRef<DialogComponent>
+    private dialogRef: MatDialogRef<DialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public editData: any
   ) {}
 
   ngOnInit(): void {
@@ -31,6 +32,15 @@ export class DialogComponent implements OnInit {
       id: ['', Validators.required],
       about: [''],
     });
+
+    if (this.editData) {
+      this.supeForm.controls['name'].setValue(this.editData.name);
+      this.supeForm.controls['category'].setValue(this.editData.category);
+      this.supeForm.controls['dateBirth'].setValue(this.editData.name);
+      this.supeForm.controls['power'].setValue(this.editData.power);
+      this.supeForm.controls['id'].setValue(this.editData.id);
+      this.supeForm.controls['about'].setValue(this.editData.about);
+    }
   }
 
   addSupe() {

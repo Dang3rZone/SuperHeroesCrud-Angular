@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     'power',
     'id',
     'about',
+    'action',
   ];
   dataSource!: MatTableDataSource<any>;
 
@@ -48,6 +49,13 @@ export class AppComponent implements OnInit {
       error: (err: any) => {
         alert('error while getting supes');
       },
+    });
+  }
+
+  editSupe(row: any) {
+    this.dialog.open(DialogComponent, {
+      width: '30%',
+      data: row,
     });
   }
 
