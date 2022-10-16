@@ -1,25 +1,14 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="secundary">
   <button
     mat-icon-button
     class="example-icon"
     aria-label="Example icon-button with menu icon"
   >
-    <mat-icon>menu</mat-icon>
+    <mat-icon>supervised_user_circle</mat-icon>
   </button>
   <span>Superheroes Wiki</span>
   <span class="example-spacer"></span>
-  <button
-    mat-icon-button
-    class="example-icon favorite-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <mat-icon>favorite</mat-icon>
-  </button>
-  <button
-    mat-icon-button
-    class="example-icon"
-    aria-label="Example icon-button with share icon"
-  >
-    <mat-icon>share</mat-icon>
+  <button mat-raised-button color="warn" (click)="openDialog()">
+    Add Hero/Villain
   </button>
 </mat-toolbar>
