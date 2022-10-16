@@ -1,1 +1,53 @@
-<p>dialog works!</p>
+<h2 mat-dialog-title>Add a hero or Villain</h2>
+<div mat-dialog-content>
+  <mat-form-field appearance="outline">
+    <mat-label>Hero/Villain Name</mat-label>
+    <input matInput placeholder="Hint: Superman/Joker" />
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Category(Hero/Villain)</mat-label>
+    <mat-select placeholder="Category">
+      <mat-option value="hero">Hero</mat-option>
+      <mat-option value="villain">Villain</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Date of birth</mat-label>
+    <input matInput [matDatepicker]="picker" />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <label for=""><h3>Super power</h3></label>
+  <mat-radio-group>
+    <mat-radio-button
+      class="example-radio-button"
+      *ngFor="let power of powersList"
+      [value]="power"
+    >
+      {{ power }}
+    </mat-radio-button>
+  </mat-radio-group>
+
+  <mat-form-field appearance="outline">
+    <mat-label>ID</mat-label>
+    <input matInput type="number" placeholder="Hint: Superman/Joker" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>About</mat-label>
+    <textarea
+      matInput
+      type="textarea"
+      placeholder="Who this person is"
+    ></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions [align]="'end'">
+  <button mat-raised-button color="warn" mat-dialog-close>Close</button>
+  <button mat-raised-button color="primary">Save</button>
+</div>

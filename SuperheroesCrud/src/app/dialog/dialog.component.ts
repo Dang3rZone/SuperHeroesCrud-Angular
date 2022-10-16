@@ -10,5 +10,6 @@ export interface DialogData {
   styleUrls: ['./dialog.component.scss'],
 })
 export class DialogComponent implements OnInit {
+  powersList = ['Creation', 'Manipulations', ' Destruction'];
   ngOnInit(): void {}
 }
