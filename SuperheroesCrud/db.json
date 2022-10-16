@@ -1,5 +1,22 @@
 {
-  "superList": [],
+  "superList": [
+    {
+      "name": "joker",
+      "category": "Villain",
+      "dateBirth": "2022-05-10T22:00:00.000Z",
+      "power": " Destruction",
+      "id": 1,
+      "about": "sdcsdsddsf"
+    },
+    {
+      "name": "green lantern",
+      "category": "Hero",
+      "dateBirth": "2022-10-07T22:00:00.000Z",
+      "power": "Creation",
+      "id": 2,
+      "about": "sdfsdfdsfd"
+    }
+  ],
   "comments": [
     {
       "id": 1,
