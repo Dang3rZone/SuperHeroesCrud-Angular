@@ -1,10 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ApiService } from '../services/api.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ApiService } from '../services/api.service';
 
-export interface DialogData {
-  animal: 'panda' | 'unicorn' | 'lion';
+export interface SupeDialogData {
+  name: string;
+  category: string;
+  dateBirth: string;
+  power: string;
+  id: number;
+  about: string;
 }
 
 @Component({
@@ -13,19 +18,28 @@ export interface DialogData {
   styleUrls: ['./dialog.component.scss'],
 })
 export class DialogComponent implements OnInit {
-  powersList = ['Creation', 'Manipulations', ' Destruction'];
+  powersList: string[] = ['Creation', 'Manipulations', 'Destruction'];
   actionBtn: string = 'Save';
   supeForm!: FormGroup;
 
   constructor(
-    private FormBuilder: FormBuilder,
-    private api: ApiService,
+    private formBuilder: FormBuilder,
+    private apiService: ApiService,
     private dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public editData: any
+    @Inject(MAT_DIALOG_DATA) public editData: SupeDialogData
   ) {}
 
   ngOnInit(): void {
-    this.supeForm = this.FormBuilder.group({
+    this.createForm();
+
+    if (this.editData) {
+      this.actionBtn = 'Update';
+      this.supeForm.patchValue(this.editData);
+    }
+  }
+
+  private createForm(): void {
+    this.supeForm = this.formBuilder.group({
       name: ['', Validators.required],
       category: ['', Validators.required],
       dateBirth: ['', Validators.required],
@@ -33,47 +47,35 @@ export class DialogComponent implements OnInit {
       id: ['', Validators.required],
       about: [''],
     });
-
-    if (this.editData) {
-      this.actionBtn = 'Update';
-      this.supeForm.controls['name'].setValue(this.editData.name);
-      this.supeForm.controls['category'].setValue(this.editData.category);
-      this.supeForm.controls['dateBirth'].setValue(this.editData.dateBirth);
-      this.supeForm.controls['power'].setValue(this.editData.power);
-      this.supeForm.controls['id'].setValue(this.editData.id);
-      this.supeForm.controls['about'].setValue(this.editData.about);
-    }
   }
 
-  addSupe() {
+  addSupe(): void {
+    if (this.supeForm.invalid) {
+      return;
+    }
+
+    const formValue = this.supeForm.value;
+
     if (!this.editData) {
-      if (this.supeForm.valid) {
-        this.api.postSupe(this.supeForm.value).subscribe({
-          next: (res) => {
-            alert('supe added successfully');
-            this.supeForm.reset();
-            this.dialogRef.close('save');
-          },
-          error: () => {
-            alert('supe added failed');
-          },
-        });
-      }
+      this.apiService.postSupe(formValue).subscribe({
+        next: () => {
+          alert('Supe added successfully');
+          this.dialogRef.close('save');
+        },
+        error: () => {
+          alert('Failed to add Supe');
+        },
+      });
     } else {
-      this.updateSupe();
+      this.apiService.putSupe(formValue, this.editData.id).subscribe({
+        next: () => {
+          alert('Supe updated successfully');
+          this.dialogRef.close('update');
+        },
+        error: () => {
+          alert('Failed to update Supe');
+        },
+      });
     }
-  }
-
-  updateSupe() {
-    this.api.putSupe(this.supeForm.value, this.editData.id).subscribe({
-      next: (res) => {
-        alert('supe updated successfully');
-        this.supeForm.reset();
-        this.dialogRef.close('update');
-      },
-      error: () => {
-        alert('supe not updated');
-      },
-    });
   }
 }
