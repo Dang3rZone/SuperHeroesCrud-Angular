@@ -6,7 +6,15 @@
       "dateBirth": "2022-05-10T22:00:00.000Z",
       "power": " Destruction",
       "id": 1,
-      "about": "sdcsdsddsf"
+      "about": "likes batman"
+    },
+    {
+      "name": "Patri",
+      "category": "Villain",
+      "dateBirth": "2023-04-04T22:00:00.000Z",
+      "power": "Manipulations",
+      "id": 12,
+      "about": "hehehe"
     }
   ],
   "comments": [
