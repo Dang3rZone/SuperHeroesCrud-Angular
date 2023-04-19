@@ -54,6 +54,10 @@ export class DialogComponent implements OnInit {
       return;
     }
 
+    const nameControl = this.supeForm.get('name');
+    nameControl?.setValue(nameControl.value.toUpperCase());
+    nameControl?.updateValueAndValidity();
+
     const formValue = this.supeForm.value;
 
     if (!this.editData) {

@@ -1,7 +1,7 @@
 {
   "superList": [
     {
-      "name": "joker",
+      "name": "JOKER",
       "category": "Villain",
       "dateBirth": "2022-05-10T22:00:00.000Z",
       "power": " Destruction",
@@ -9,12 +9,28 @@
       "about": "likes batman"
     },
     {
-      "name": "Patri",
+      "name": "HARLEY",
       "category": "Villain",
       "dateBirth": "2023-04-04T22:00:00.000Z",
       "power": "Manipulations",
       "id": 12,
       "about": "hehehe"
+    },
+    {
+      "name": "PATRI",
+      "category": "Villain",
+      "dateBirth": "2023-04-02T22:00:00.000Z",
+      "power": "Manipulations",
+      "id": 15,
+      "about": "tapitas"
+    },
+    {
+      "name": "SAMMY",
+      "category": "Hero",
+      "dateBirth": "2023-04-09T22:00:00.000Z",
+      "power": "Creation",
+      "id": 456,
+      "about": ""
     }
   ],
   "comments": [
